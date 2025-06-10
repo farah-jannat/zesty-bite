@@ -9,7 +9,8 @@ function App() {
 
   return (
     <>
-      <Button>lets build app together</Button>
+      <Button className="bg-orange">lets build app together</Button>
+      
     </>
   );
 }
