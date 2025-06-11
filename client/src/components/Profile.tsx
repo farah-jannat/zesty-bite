@@ -7,9 +7,18 @@ import { Input } from "./ui/input";
 type Props = {};
 
 const Profile = () => {
+  const [profileData, setProfileData] = useState({
+    fullName: "",
+    email: "",
+    address: "",
+    city: "",
+    country: "",
+    profilePicture: "",
+  });
   const imageRef = useRef<HTMLInputElement | null>(null);
-  const [selectedProfilePicture, setSelectedProfilePicture] =
-    useState<string>("");
+  const [selectedProfilePicture, setSelectedProfilePicture] = useState<string>(
+    profileData.profilePicture || ""
+  );
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -18,9 +27,17 @@ const Profile = () => {
       reader.onloadend = () => {
         const result = reader.result as string;
         setSelectedProfilePicture(result);
+        setProfileData((prevData) => ({
+          ...prevData,
+          profilePicture: result,
+        }));
       };
       reader.readAsDataURL(file);
     }
+  };
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProfileData({ ...profileData, [name]: value });
   };
 
   return (
@@ -46,8 +63,9 @@ const Profile = () => {
           </Avatar>
           <Input
             type="text"
-            name="fullname"
-            value=""
+            name="fullName"
+            value={profileData.fullName}
+            onChange={changeHandler}
             className="font-bold text-2xl outline-none border-none focus-visible:ring-transparent"
           />
         </div>
