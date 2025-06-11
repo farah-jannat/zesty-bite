@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ const CheckoutConfirmPage = ({
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-    const [loading, SetLoading] = useState<boolean>(false)
+  const loading = false;
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -33,6 +33,11 @@ const CheckoutConfirmPage = ({
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+  const checkoutHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("all input of cart form", input);
+    // api implementation start from here
+  };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
@@ -41,7 +46,10 @@ const CheckoutConfirmPage = ({
           Double-check your delivery details and ensure everything is in order.
           When you are ready, hit confirm button to finalize your order
         </DialogDescription>
-        <form className="md:grid grid-cols-2 gap-2 space-y-1 md:space-y-0">
+        <form
+          onSubmit={checkoutHandler}
+          className="md:grid grid-cols-2 gap-2 space-y-1 md:space-y-0"
+        >
           <div>
             <Label>Fullname</Label>
             <Input
