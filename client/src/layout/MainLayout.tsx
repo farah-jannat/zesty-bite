@@ -7,12 +7,12 @@ type Props = {};
 
 const MainLayout = (props: Props) => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen m-2 md:m-0">
       <header>
         <Navbar />
       </header>
       {/* main conteant */}
-      <div>
+      <div className="flex-1">
         <Outlet />
       </div>
       {/* footer  */}
