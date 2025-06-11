@@ -1,4 +1,4 @@
-import { MenuItem } from "@/types/restaurantType";
+
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import hero_img from "@/assets/hero_pizza.png";
