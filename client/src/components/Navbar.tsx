@@ -39,7 +39,7 @@ import {
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 
-type Props = {};
+
 
 const Navbar = () => {
   const admin = true;
