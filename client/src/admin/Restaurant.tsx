@@ -54,6 +54,11 @@ const Restaurant = () => {
                   onChange={changeEventHandler}
                   placeholder="Enter your restaurant name"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.restaurantName}
+                  </span>
+                )}
               </div>
               <div>
                 <Label>City</Label>
@@ -64,6 +69,11 @@ const Restaurant = () => {
                   onChange={changeEventHandler}
                   placeholder="Enter your city name"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.city}
+                  </span>
+                )}
               </div>
               <div>
                 <Label>Country</Label>
@@ -74,6 +84,11 @@ const Restaurant = () => {
                   onChange={changeEventHandler}
                   placeholder="Enter your country name"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.country}
+                  </span>
+                )}
               </div>
               <div>
                 <Label>Delivery Time</Label>
@@ -84,6 +99,11 @@ const Restaurant = () => {
                   onChange={changeEventHandler}
                   placeholder="Enter your delivery time"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.deliveryTime}
+                  </span>
+                )}
               </div>
               <div>
                 <Label>Cuisines</Label>
@@ -96,6 +116,11 @@ const Restaurant = () => {
                   }
                   placeholder="e.g. Momos, Biryani"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.cuisines}
+                  </span>
+                )}
               </div>
               <div>
                 <Label>Upload Restaurant Banner</Label>
@@ -110,6 +135,11 @@ const Restaurant = () => {
                   accept="image/*"
                   name="imageFile"
                 />
+                {errors && (
+                  <span className="text-xs text-red-600 font-medium">
+                    {errors.imageFile?.name}
+                  </span>
+                )}
               </div>
             </div>
             <div className="my-5 w-fit">
