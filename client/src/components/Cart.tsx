@@ -4,6 +4,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -66,9 +67,31 @@ const Cart = () => {
                 </Button>
               </div>
             </TableCell>
+            <TableCell> 80 </TableCell>
+            <TableCell className="text-right">
+              <Button
+                size={"sm"}
+                className="bg-orange hover:bg-hoverOrange"
+                variant={"outline"}
+              >
+                {" "}
+                Remove{" "}
+              </Button>{" "}
+            </TableCell>
           </TableRow>
         </TableBody>
+        <TableFooter>
+          <TableRow className="text-2xl font-bold">
+            <TableCell colSpan={5}>Total</TableCell>
+            <TableCell className="text-right">80</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
+      <div className="flex justify-end my-5">
+        <Button className="bg-orange hover:bg-hoverOrange">
+          Proceed To Checkout
+        </Button>
+      </div>
     </div>
   );
 };
