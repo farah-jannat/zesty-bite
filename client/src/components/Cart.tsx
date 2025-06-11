@@ -10,6 +10,7 @@ import {
 } from "./ui/table";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Minus, Plus } from "lucide-react";
 
 const Cart = () => {
   return (
@@ -38,7 +39,33 @@ const Cart = () => {
             </TableCell>
             <TableCell> cart name</TableCell>
             <TableCell> price </TableCell>
-            <TableCell> price </TableCell>
+            <TableCell>
+              {" "}
+              <div className="w-fit flex items-center rounded-full border border-gray-100 dark:border-gray-800 shadow-md">
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  className="rounded-full bg-gray-200"
+                >
+                  <Minus />
+                </Button>
+                <Button
+                  size={"icon"}
+                  className="font-bold border-none"
+                  disabled
+                  variant={"outline"}
+                >
+                  89
+                </Button>
+                <Button
+                  size={"icon"}
+                  className="rounded-full bg-orange hover:bg-hoverOrange"
+                  variant={"outline"}
+                >
+                  <Plus />
+                </Button>
+              </div>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
