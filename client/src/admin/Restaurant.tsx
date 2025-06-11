@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RestaurantFormSchema } from "@/schema/restaurantSchema";
+import {
+  RestaurantFormSchema,
+  restaurantFromSchema,
+} from "@/schema/restaurantSchema";
 
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const Restaurant = () => {
   const loading = false;
@@ -17,17 +20,29 @@ const Restaurant = () => {
     cuisines: [],
     imageFile: undefined,
   });
+  const [errors, setErrors] = useState<Partial<RestaurantFormSchema>>({});
+
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     setInput({ ...input, [name]: type === "number" ? Number(value) : value });
   };
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
+    const result = restaurantFromSchema.safeParse(input);
+    if (!result.success) {
+      const fieldErrors = result.error.formErrors.fieldErrors;
+      setErrors(fieldErrors as Partial<RestaurantFormSchema>);
+      return;
+    }
+    // add restaurant api implementation start from here
+  };
   return (
     <div className="max-w-6xl mx-auto my-10">
       <div>
         <div>
           <h1 className="font-extrabold text-2xl mb-5">Add Restaurants</h1>
-          <form>
+          <form onSubmit={submitHandler}>
             <div className="md:grid grid-cols-2 gap-6 space-y-2 md:space-y-0">
               {/* Restaurant Name  */}
               <div>
