@@ -75,33 +75,47 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-
 export const verifyEmail = async (req: Request, res: Response) => {
-    try {
-        const { verificationCode } = req.body;
-       
-        const user = await User.findOne({ verificationToken: verificationCode, verificationTokenExpiresAt: { $gt: Date.now() } }).select("-password");
+  try {
+    const { verificationCode } = req.body;
 
-        if (!user) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid or expired verification token"
-            });
-        }
-        user.isVerified = true;
-        user.verificationToken = undefined;
-        user.verificationTokenExpiresAt = undefined
-        await user.save();
+    const user = await User.findOne({
+      verificationToken: verificationCode,
+      verificationTokenExpiresAt: { $gt: Date.now() },
+    }).select("-password");
 
-        // send welcome email
-        
-        return res.status(200).json({
-            success: true,
-            message: "Email verified successfully.",
-            user,
-        })
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Internal server error" })
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification token",
+      });
     }
-}
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    await user.save();
+
+    // send welcome email
+
+    return res.status(200).json({
+      success: true,
+      message: "Email verified successfully.",
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const logout = async (_: Request, res: Response) => {
+  try {
+    return res.clearCookie("token").status(200).json({
+      success: true,
+      message: "Logged out successfully.",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
