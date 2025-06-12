@@ -15,6 +15,7 @@ import { Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
+import EditMenu from "./EditMenu";
 
 const AddMenu = () => {
   const [input, setInput] = useState<MenuFormSchema>({
@@ -36,7 +37,7 @@ const AddMenu = () => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(input)
+    console.log(input);
     const result = menuSchema.safeParse(input);
     if (!result.success) {
       const fieldErrors = result.error.formErrors.fieldErrors;
@@ -175,6 +176,11 @@ const AddMenu = () => {
           </div>
         </div>
       ))}
+      <EditMenu
+        selectedMenu={selectedMenu}
+        editOpen={editOpen}
+        setEditOpen={setEditOpen}
+      />
     </div>
   );
 };
