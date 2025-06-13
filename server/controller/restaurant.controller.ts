@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Restaurant } from "../models/restaurant.model";
 import uploadImageOnCloudinary from "../utils/imageUpload";
+import { Order } from "../models/order.model";
 
 export const createRestaurant = async (req: Request, res: Response) => {
   try {
@@ -87,6 +88,28 @@ export const updateRestaurant = async (req: Request, res: Response) => {
       success: true,
       message: "Restaurant updated",
       restaurant,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getRestaurantOrder = async (req: Request, res: Response) => {
+  try {
+    const restaurant = await Restaurant.findOne({ user: req.id });
+    if (!restaurant) {
+      return res.status(404).json({
+        success: false,
+        message: "Restaurant not found",
+      });
+    }
+    const orders = await Order.find({ restaurant: restaurant._id })
+      .populate("restaurant")
+      .populate("user");
+    return res.status(200).json({
+      success: true,
+      orders,
     });
   } catch (error) {
     console.log(error);
