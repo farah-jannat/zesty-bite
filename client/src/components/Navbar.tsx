@@ -38,12 +38,11 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
-
-
+import { useUserStore } from "@/store/useUserStore";
 
 const Navbar = () => {
-  const admin = true;
-  const loading = false;
+  const { user, logout, loading } = useUserStore();
+
   const cart = [1, 2, 3, 4, 5];
   return (
     <div className="max-w-7xl mx-auto">
@@ -57,7 +56,7 @@ const Navbar = () => {
             <Link to="/profile">Profile</Link>
             <Link to="/order/status">Order</Link>
           </div>
-          {admin && (
+          {user?.admin && (
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger>Dashboard</MenubarTrigger>
@@ -116,7 +115,12 @@ const Navbar = () => {
                 Please wait
               </Button>
             ) : (
-              <Button className="bg-orange hover:bg-hoverOrange">Logout</Button>
+              <Button
+                onClick={logout}
+                className="bg-orange hover:bg-hoverOrange"
+              >
+                Logout
+              </Button>
             )}
           </div>
           <div />
@@ -133,8 +137,8 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNavbar = () => {
-  const admin = true;
-  const loading = false;
+  const { user, logout, loading } = useUserStore();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -186,7 +190,7 @@ const MobileNavbar = () => {
             <ShoppingCart />
             <span>Cart (0)</span>
           </Link>
-          {admin && (
+          {user?.admin && (
             <>
               <Link
                 to="/admin/menu"
@@ -227,7 +231,12 @@ const MobileNavbar = () => {
                 Please wait
               </Button>
             ) : (
-              <Button className="bg-orange hover:bg-hoverOrange">Logout</Button>
+              <Button
+                onClick={logout}
+                className="bg-orange hover:bg-hoverOrange"
+              >
+                Logout
+              </Button>
             )}
           </SheetClose>
         </SheetFooter>
