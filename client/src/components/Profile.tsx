@@ -18,7 +18,7 @@ type Props = {};
 const Profile = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [profileData, setProfileData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     address: "",
     city: "",
@@ -73,8 +73,8 @@ const Profile = () => {
           </Avatar>
           <Input
             type="text"
-            name="fullName"
-            value={profileData.fullName}
+            name="fullname"
+            value={profileData.fullname}
             onChange={changeHandler}
             className="font-bold text-2xl outline-none border-none focus-visible:ring-transparent"
           />
